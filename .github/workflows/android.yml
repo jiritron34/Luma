@@ -30,7 +30,18 @@ jobs:
       - name: Install Android build packages
         run: yes | sdkmanager --licenses && sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Build and test debug APK
-        run: gradle --no-daemon testDebugUnitTest assembleDebug
+        shell: bash
+        run: |
+          set +e
+          gradle --no-daemon testDebugUnitTest assembleDebug --stacktrace > build-output.log 2>&1
+          result=$?
+          if [ "$result" -ne 0 ]; then
+            tail -n 35 build-output.log | while IFS= read -r line; do
+              printf '::error::%s\n' "$line"
+            done
+            exit "$result"
+          fi
+          cat build-output.log
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
