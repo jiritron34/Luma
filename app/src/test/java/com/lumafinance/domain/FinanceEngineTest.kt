@@ -44,7 +44,7 @@ class FinanceEngineTest {
         assertEquals(250L,FinanceEngine.categorySpend(data,LocalDate.of(2026,1,1).toEpochDay(),LocalDate.of(2026,2,1).toEpochDay())["Food"])
     }
     @Test fun goalProgressIsClampedAndZeroTargetIsSafe() {
-        assertEquals(0.0,FinanceEngine.goalProgress(Goal("a","A",0,100)),0.0)
+        assertEquals(0.0,FinanceEngine.goalProgress(Goal("a","A",100,0)),0.0)
         assertEquals(1.0,FinanceEngine.goalProgress(Goal("b","B",100,150)),0.0)
         assertEquals(0.4,FinanceEngine.goalProgress(Goal("c","C",100,40)),0.0001)
     }
