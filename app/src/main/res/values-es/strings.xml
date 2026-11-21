@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Luma Finanzas</string>
+    <string name="widget_balance">Saldo total</string>
+    <string name="widget_spending">Gastos del mes</string>
+    <string name="widget_goals">Metas de ahorro</string>
+    <string name="widget_quick">Gasto rápido</string>
+</resources>
