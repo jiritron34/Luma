@@ -36,7 +36,9 @@ jobs:
           gradle --no-daemon testDebugUnitTest assembleDebug --stacktrace > build-output.log 2>&1
           result=$?
           if [ "$result" -ne 0 ]; then
-            tail -n 35 build-output.log | while IFS= read -r line; do
+            errors=$(grep -E '^(e:|w:|.*error:|.*What went wrong:|.*Execution failed for task|.*FAILED)' build-output.log | tail -n 25)
+            if [ -z "$errors" ]; then errors=$(tail -n 35 build-output.log); fi
+            printf '%s\n' "$errors" | while IFS= read -r line; do
               printf '::error::%s\n' "$line"
             done
             exit "$result"

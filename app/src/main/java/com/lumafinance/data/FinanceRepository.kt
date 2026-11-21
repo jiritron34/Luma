@@ -2,6 +2,8 @@ package com.lumafinance.data
 
 import android.content.Context
 import kotlinx.coroutines.flow.combine
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import com.lumafinance.domain.FinanceEngine
 import kotlinx.coroutines.Dispatchers
